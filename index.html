@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charming Store - Produk UMKM Pilihan</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- Kustomisasi Variabel Warna (Palet Kontras) --- */
+        :root {
+            --primary-color: #0a1931; /* Biru Tua (Navy) - Profesional & Elegan */
+            --secondary-color: #ff6f3c; /* Oranye Terang (Coral) - Enerjik & Kontras */
+            --bg-light: #f4f7f6; /* Abu-abu Sangat Muda - Bersih */
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+        }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg-light); 
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Playfair Display', serif; /* Font Serif untuk kesan premium */
+            font-weight: 700;
+        }
+
+        /* --- Navbar Style --- */
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-size: 28px;
+            color: var(--secondary-color) !important; /* Warna kontras di navbar */
+            letter-spacing: 1px;
+        }
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 400;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+
+        /* --- Hero Section Style (Selamat Datang) --- */
+        .hero-section {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 120px 0;
+            position: relative;
+        }
+        /* Elemen dekoratif kontras */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .hero-title {
+            font-size: 64px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-title span {
+            color: var(--secondary-color); /* Highlight kontras pada nama toko */
+        }
+        .hero-lead {
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-charming {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 15px 35px;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,111,60,0.4);
+        }
+        .btn-charming:hover {
+            background-color: #ff5722;
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,111,60,0.6);
+        }
+
+        /* --- Section Title --- */
+        .section-title h2 {
+            font-size: 42px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .section-title p {
+            color: #6c757d;
+            font-weight: 300;
+            margin-bottom: 50px;
+        }
+        /* Garis bawah dekoratif kontras */
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Product Card Style --- */
+        .product-card {
+            background: var(--text-light);
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            position: relative;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(10,25,49,0.15);
+        }
+        .card-img-container {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 66%; /* Aspect Ratio 3:2 */
+            background-color: #eee;
+        }
+        .product-card img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
+        .badge-stok {
+            position: absolute;
+            top: 15px; right: 15px;
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 12px;
+            z-index: 2;
+        }
+        .card-body {
+            padding: 25px;
+            text-align: center;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .card-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--secondary-color); /* Harga kontras */
+            margin-bottom: 20px;
+        }
+        .btn-detail {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-detail:hover {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        /* --- Footer Style --- */
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 70px 0 30px;
+            margin-top: 100px;
+        }
+        .footer-brand {
+            font-size: 32px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .footer-social-icon {
+            font-size: 20px;
+            color: var(--text-light);
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .footer-social-icon:hover {
+            color: var(--secondary-color);
+        }
+        .copyright {
+            opacity: 0.6;
+            margin-top: 50px;
+            font-weight: 300;
+            font-size: 14px;
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 40px; }
+            .section-title h2 { font-size: 32px; }
+            .hero-section { padding: 80px 0; text-align: center; }
+            .hero-lead { margin: 0 auto 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">CHARMING STORE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#katalog">Katalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tentangkami.html">Tentang Kami</a></li>
+                    <li class="nav-item">
+                        <a href="pesen.html" class="btn btn-warning fw-bold ms-lg-3 rounded-pill text-dark">
+                            <i class="fas fa-plus-circle me-1"></i> Pesan Produk
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section shadow-sm">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <h1 class="hero-title">Selamat Datang di <span>CHARMING STORE</span></h1>
+                    <p class="hero-lead lead">Temukan koleksi pakaian pilihan yang menawan, unik, dan berkualitas tinggi hanya untuk Anda.</p>
+                    <a href="#katalog" class="btn btn-charming btn-lg">Jelajahi Katalog</a>
+                </div>
+                <div class="col-lg-5 text-center d-none d-lg-block">
+                    <i class="fas fa-shopping-bag fa-10x" style="color: rgba(255,111,60,0.2);"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5 py-5" id="katalog">
+        <div class="section-title text-center">
+            <h2>Katalog Produk Pilihan</h2>
+            <p class="lead">Koleksi istimewa yang kami hadirkan spesial untuk memenuhi gaya hidup Anda.</p>
+        </div>
+
+        <img src="dress.png" alt="dress wanita hitam putih" style="width: 200px; border-radius: 15px;">
+         <img src="jaketwnt.jpg" alt="dress wanita hitam putih" style="width: 200px; border-radius: 15px;">
+         <img src="baju.jpg" alt="dress wanita hitam putih" style="width: 160px; border-radius: 15px;">
+         <img src="kaospink.jpg" alt="dress wanita hitam putih" style="width: 200px; border-radius: 15px;">
+         <img src="kaoshitam.jpg" alt="dress wanita hitam putih" style="width: 250px; border-radius: 15px;">
+         <img src="gucci.jpeg" alt="dress wanita hitam putih" style="width: 200px; border-radius: 15px;">
+         <img src="asaya.png" alt="dress wanita hitam putih" style="width: 200px; border-radius: 15px;">
+         <img src="blouse.webp" alt="dress wanita hitam putih" style="width: 200px; border-radius: 15px;">
+         <img src="biru.jpeg" alt="dress wanita hitam putih" style="width: 250px; border-radius: 15px;">
+         <img src="casual.png" alt="dress wanita hitam putih" style="width: 200px; border-radius: 15px;">
+
+
+
+
+         <div class="row g-4 justify-content-center">
+          
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="product-card">
+                    <span class="badge badge-stok">
+                        <i class="fas fa-box me-1"></i> 
+                    </span>
+                    
+                    <div class="card-img-container">
+                        <img src=images.png>alt="<?php echo $data['nama_produk']; ?>">
+                    </div>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $data['nama_produk']; ?></h5>
+                        <p class="card-price">
+                            Rp <?php echo number_format($data['harga'], 0, ',', '.'); ?>
+                        </p>
+                        <a href="https://id.shp.ee/1yTeURpa" class="btn btn-detail w-100">
+                            <i class="fas fa-shopping-cart me-1"></i> Lihat Detail
+                           
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        
+        </div>
+    </main>
+
+    <footer class="footer text-center">
+        <div class="container">
+            <h2 class="footer-brand">CHARMING STORE</h2>
+            <p class="fw-300 opacity-75 mb-4">Mendukung UMKM Lokal, Menghadirkan Kualitas.</p>
+            <div class="social-links mb-4">
+                <a href="https://www.instagram.com/alvartaa_?igsh=ZnU5OHNpYTJxOGZs" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1BKMGSnX5U/?mibextid=wwXIfr" class="footer-social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me.qr/BUABWDU6JLYEH1" class="footer-social-icon"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.tiktok.com/@rizkyyyyyyyy_21?_r=1&_t=ZS-95E6rd33HQ0" class="footer-social-icon"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Charming Store UMKM. Crafted with <i class="fas fa-heart" style="color: var(--secondary-color);"></i> by kelompok 6.</p>
+            <p>eva devitasari 251501037</p>
+            <p>muhammad rizqi 251501040</p>
+            <p>alvina arta meliani 251501059</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
